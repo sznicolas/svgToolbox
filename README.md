@@ -1,5 +1,6 @@
 # svgToolbox
 
+## Overview
 This toolbox aims to simplify, unify and reduce gas costs for the onchain SVG images.  
 Instead of writing many times and in many contracts all the SVG code, use instead: 
 ```solidity
@@ -27,7 +28,7 @@ As you can see, most of the parameters are encoded, so the gas cost for the stor
 The most impressive data reduction is visible in `<path` data, which draws advanced shapes [example here](https://github.com/sznicolas/svgToolbox/blob/149d090eeaf498dc74580aa01576b792a0bd10f7/contracts/sundownerERC721.sol#L33) produces [this](https://opensea.io/assets/matic/0x8c356d86ba1b80578626abe4d7cbbeeae031637e/19)
 
 
-Functions implemented:
+## Functions implemented
 ```
 function startSvg(uint _x, uint _y, uint _length, uint _width) external view returns (bytes memory);
 function endSvg() external view returns (bytes memory);
@@ -42,6 +43,8 @@ function path(bytes memory _b) external view returns (bytes memory);
 function use(bytes memory _b) external view returns (bytes memory);
 function linearGradient(bytes memory _b) external pure returns (bytes memory);
 ```
+
+## Interface parameters
 All the parameters are unified for the shapes, let's see `polygon`for example:
 | Pos    | Ex. Value | Meaning       | Note                                       |
 |-------:|-----------|---------------|--------------------------------------------|
@@ -53,14 +56,28 @@ All the parameters are unified for the shapes, let's see `polygon`for example:
 | 7,8    | 006a      | 3rd point x,y |                                            |
 | m,n... |           | nth point x,y |                                            |
 
-# Tools
-## tokenURItoSVG.py
+## Tools
+### tokenURItoSVG.py
 [tokenURItoSVG.py](scripts/tokenURItoSVG.py) displays metadata, svg and formatted svg when debbuging in Brownie.
-## svgpath2hex.py
+Usage:
+```
+>>> from tokenURItoSVG import tokenURItoSVG
+>>> tokenURItoSVG(testContract.tokenURI(0), outfile=True)
+### Metadata ###
+name: Sundowner
+### Raw image ###
+ b"<svg viewBox=[...]"
+### Pretty xml ###
+ <?xml version="1.0" ?>
+<svg xmlns=[...]
+```
+
+### svgpath2hex.py
 [svgpath2hex.py](scripts/svgpath2hex.py) tries to round a `path data` and codes it in a bytes string readable by [path](https://github.com/sznicolas/svgToolbox/blob/149d090eeaf498dc74580aa01576b792a0bd10f7/contracts/svgtoolbox.sol#L184)
 
+## Live
 Deployed [here](https://polygonscan.com/address/0xe7f466a2ce49d02d23a99ea148b0c4233a9ce0b0#code)
 
-For now you can view the [Prototype](https://github.com/sznicolas/protoSvgLib)
+My first [Prototype](https://github.com/sznicolas/protoSvgLib)
 
 Exemple of NFT using this tollbox [here](https://polygonscan.com/address/0x8c356d86ba1b80578626abe4d7cbbeeae031637e#code) and on [OpenSea](https://opensea.io/collection/sundowner) (Right click on the image, then open in a new tab to have an animation on hover)
