@@ -58,9 +58,11 @@ All the parameters are unified for the shapes, let's see `polygon`for example:
 
 ## Tools
 ### tokenURItoSVG.py
-[tokenURItoSVG.py](scripts/tokenURItoSVG.py) displays metadata, svg and formatted svg when debbuging in Brownie.
-Usage:
+[tokenURItoSVG.py](scripts/tokenURItoSVG.py) displays metadata, svg and formatted xml when debbuging in Brownie.
+Example:
 ```
+>>> testContract.tokenURI(0)
+'data:application/json;base64,eyJuYW1[...]QZz09In0='
 >>> from tokenURItoSVG import tokenURItoSVG
 >>> tokenURItoSVG(testContract.tokenURI(0), outfile=True)
 ### Metadata ###
