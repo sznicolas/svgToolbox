@@ -27,7 +27,7 @@ As you can see, most of the parameters are encoded, so the gas cost for the stor
 The most impressive data reduction is visible in `<path` data, which draws advanced shapes [example here](https://github.com/sznicolas/svgToolbox/blob/149d090eeaf498dc74580aa01576b792a0bd10f7/contracts/sundownerERC721.sol#L33) produces [this](https://opensea.io/assets/matic/0x8c356d86ba1b80578626abe4d7cbbeeae031637e/19)
 
 
-Functions implemented yet:
+Functions implemented:
 ```
 function startSvg(uint _x, uint _y, uint _length, uint _width) external view returns (bytes memory);
 function endSvg() external view returns (bytes memory);
@@ -43,20 +43,19 @@ function use(bytes memory _b) external view returns (bytes memory);
 function linearGradient(bytes memory _b) external pure returns (bytes memory);
 ```
 All the parameters are unified for the shapes, let's see `polygon`for example:
-Parameters:
-| Pos    | Ex. Value | Meaning       | Note                |
-|-------:|-----------|---------------|---------------------|
-| 0      | fa        | id="i250"     | Use 00 to disable   |
-| 1      | fe        | class="c254"  |                     |
-| 2      | 01        | ending '>'    | if 0 ends with '/>' | 
-| 3,4    | 404e      | 1st point, xy |                     |
-| 5,6    | 4000      | 2nd point, xy |                     |
-| 7,8    | 006a      | 3rd point, xy |                     |
-| m,n... |           | nth point, xy |                     |
+| Pos    | Ex. Value | Meaning       | Note                                       |
+|-------:|-----------|---------------|--------------------------------------------|
+| 0      | fa        | id="i250"     | 00 for no id                               |
+| 1      | fe        | class="c254"  |                                            |
+| 2      | 01        | ending '/>'   | if 0 ends with '>', you must close the tag | 
+| 3,4    | 404e      | 1st point x,y |                                            |
+| 5,6    | 4000      | 2nd point x,y |                                            |
+| 7,8    | 006a      | 3rd point x,y |                                            |
+| m,n... |           | nth point x,y |                                            |
 
 # Tools
 ## tokenURItoSVG.py
-[tokenURItoSVG](scripts/tokenURItoSVG) displays metadata, svg and formatted svg when debbuging in Brownie.
+[tokenURItoSVG.py](scripts/tokenURItoSVG.py) displays metadata, svg and formatted svg when debbuging in Brownie.
 ## svgpath2hex.py
 [svgpath2hex.py](scripts/svgpath2hex.py) tries to round a `path data` and codes it in a bytes string readable by [path](https://github.com/sznicolas/svgToolbox/blob/149d090eeaf498dc74580aa01576b792a0bd10f7/contracts/svgtoolbox.sol#L184)
 
