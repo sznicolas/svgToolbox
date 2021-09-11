@@ -17,7 +17,6 @@ contract Sundowner is ERC721, ERC721URIStorage, ERC721Enumerable, Ownable {
 
     uint256 constant maxSupply = 10000; // The last could mint little bit more ;-)
     uint256 constant price = 10000000000 gwei; //10 MATIC
-//    uint256 constant price = 10000000 gwei; //0.01 MATIC
     Counters.Counter private _tokenIdCounter;
 
     // Define svg scene
@@ -44,7 +43,6 @@ contract Sundowner is ERC721, ERC721URIStorage, ERC721Enumerable, Ownable {
     function svgRaw(uint256 _tokenId) public view returns(bytes memory){
         return abi.encodePacked(
             svgContract.startSvg(0, 0,155,100),
-            //svgContract.styleColor("#i2", bgcolor),
             svgContract.styleColor("#i1", suncolor),
             svgContract.linearGradient(bgGradient),
             svgContract.rect(rectBg),
@@ -82,7 +80,7 @@ contract Sundowner is ERC721, ERC721URIStorage, ERC721Enumerable, Ownable {
     function createToken(uint _qty) external payable {
         require(maxSupply > _tokenIdCounter.current(), "No more Token to mint");
         // So we could have 19 more than the total supply :
-        require(_qty > 0 && _qty <= 200, "mint qty must be between 1-20");
+        require(_qty > 0 && _qty <= 200, "mint qty must be between 1-200");
         require(_qty * price == msg.value, "Matic amount is not correct");
         for (uint i = 0; i < _qty; i++){
             _safeMint(msg.sender, _tokenIdCounter.current());

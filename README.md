@@ -6,7 +6,7 @@ Instead of writing many times and in many contracts all the SVG code, use instea
 ```solidity
     // produces a red rectangle in a complete svg format
     return abi.encodedPacked(
-                svgContract.startSvg(0, 0,155,100),
+                svgContract.startSvg(0, 0, 155, 100),
                 //fills #i1 in red:
                 svgContract.styleColor("#i1", hex"ff0000ff"),
                 // rectangle id=i1 class=c1 ending tag/ starts at 0,0 to 10,10:
@@ -21,7 +21,7 @@ Instead of writing many times and in many contracts all the SVG code, use instea
             fill: rgba(255,0,0,255);
         }
     </style>
-    <rect id='i1' class='c1'  x='0' y='0' width='10' height='10' />
+    <rect id='i1' class='c1' x='0' y='0' width='10' height='10' />
 </svg>
 ```
 As you can see, most of the parameters are encoded, so the gas cost for the storage is limited.  
